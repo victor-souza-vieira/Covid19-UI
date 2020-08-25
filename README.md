@@ -1,6 +1,6 @@
 # Covid19
 
-A new Flutter project.
+UI baseada num speed code localizado em https://www.youtube.com/watch?v=yG3WiFu2aUE
 
 ## Getting Started
 
