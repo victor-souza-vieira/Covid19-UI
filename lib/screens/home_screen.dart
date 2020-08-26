@@ -9,23 +9,33 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 290,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: AppColors.mainColor,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+            _generateTopScreen(context),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    _textSpan('Symptomns of ', Colors.black),
+                    _textSpan('COVID 19', AppColors.mainColor),
+                  ],
                 ),
               ),
-              child: Stack(
+            ),
+            SizedBox(height: 15),
+            Container(
+              padding: EdgeInsets.only(left: 20),
+              height: 100,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
                 children: [
-                  _generateAppBar(),
-                  _generateMainText(),
-                  _generateButtons(),
-                  Image.asset('assets/images/virus2.png'),
+                  _generateListItem('assets/images/1.png', 'Fever'),
+                  _generateListItem('assets/images/2.png', 'Dry Cough'),
+                  _generateListItem('assets/images/3.png', 'Headache'),
+                  _generateListItem('assets/images/4.png', 'Breathless'),
                 ],
               ),
             ),
@@ -35,7 +45,85 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Positioned _generateButtons() {
+  Widget _generateListItem(String path, String text) {
+    return Column(
+      children: [
+        Container(
+          width: 70,
+          height: 70,
+          margin: EdgeInsets.only(right: 22),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            gradient: LinearGradient(
+              colors: [
+                AppColors.backgroundColor,
+                Colors.white,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            border: Border.all(color: Colors.white),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(1, 1),
+                spreadRadius: 1,
+                blurRadius: 3,
+              )
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Image.asset(path),
+          ),
+        ),
+        SizedBox(height: 7),
+        Text(
+          text,
+          style: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.bold,
+          ),
+        )
+      ],
+    );
+  }
+
+  TextSpan _textSpan(String text, Color color) {
+    return TextSpan(
+      text: text,
+      style: TextStyle(
+        color: color,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _generateTopScreen(BuildContext context) {
+    return Container(
+      height: 290,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: AppColors.mainColor,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
+      ),
+      child: Stack(
+        children: [
+          _generateAppBar(),
+          _generateMainText(),
+          _generateButtons(),
+          Image.asset('assets/images/virus2.png'),
+        ],
+      ),
+    );
+  }
+
+  Widget _generateButtons() {
     return Positioned(
       bottom: 30,
       child: Row(
@@ -84,7 +172,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Positioned _generateMainText() {
+  Widget _generateMainText() {
     return Positioned(
       top: 75,
       child: Padding(
