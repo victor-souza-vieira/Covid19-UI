@@ -1,5 +1,6 @@
 import 'package:Covid19/core/consts.dart';
 import 'package:Covid19/core/flutter_icons.dart';
+import 'package:Covid19/screens/statistics_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -18,8 +19,8 @@ class HomeScreen extends StatelessWidget {
               child: RichText(
                 text: TextSpan(
                   children: [
-                    _textSpan('Symptomns of ', Colors.black),
-                    _textSpan('COVID 19', AppColors.mainColor),
+                    _textSpan('Symptoms of ', Colors.black, 18),
+                    _textSpan('COVID 19', AppColors.mainColor, 18),
                   ],
                 ),
               ),
@@ -32,20 +33,173 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 physics: BouncingScrollPhysics(),
                 children: [
-                  _generateListItem('assets/images/1.png', 'Fever'),
-                  _generateListItem('assets/images/2.png', 'Dry Cough'),
-                  _generateListItem('assets/images/3.png', 'Headache'),
-                  _generateListItem('assets/images/4.png', 'Breathless'),
+                  _generateListSymptoms('assets/images/1.png', 'Fever'),
+                  _generateListSymptoms('assets/images/2.png', 'Dry Cough'),
+                  _generateListSymptoms('assets/images/3.png', 'Headache'),
+                  _generateListSymptoms('assets/images/4.png', 'Breathless'),
                 ],
               ),
             ),
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    _textSpan('Prevention', Colors.black, 22),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.only(left: 20),
+              height: 100,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
+                children: [
+                  _generateListPrevention(
+                      'assets/images/a10.png', 'WASH\n', 'hands often'),
+                  _generateListPrevention(
+                      'assets/images/a4.png', 'COVER\n', 'your cough'),
+                  _generateListPrevention(
+                      'assets/images/a6.png', 'ALWAYS\n', 'clean'),
+                  _generateListPrevention(
+                      'assets/images/a9.png', 'USE\n', 'mask'),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 20),
+              child: Column(
+                children: [
+                  Container(
+                    width: 320,
+                    height: 80,
+                    margin: EdgeInsets.only(right: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      border: Border.all(color: Colors.white),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(1, 1),
+                          spreadRadius: 0.5,
+                          blurRadius: 4,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Image.asset('assets/images/map.png'),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'CASES\n',
+                                style: TextStyle(
+                                  color: AppColors.mainColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'Overview Worldwide\n',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '21.118.594 confirmed',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 10,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(width: 15),
+                        IconButton(
+                          color: Colors.black54,
+                          icon: Icon(Icons.arrow_forward_ios),
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => StatisticsScreen(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
     );
   }
 
-  Widget _generateListItem(String path, String text) {
+  Widget _generateListPrevention(String path, String text1, String text2) {
+    return Column(
+      children: [
+        Container(
+          width: 170,
+          height: 80,
+          margin: EdgeInsets.only(right: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            border: Border.all(color: Colors.white),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(1, 1),
+                spreadRadius: 0.5,
+                blurRadius: 4,
+              )
+            ],
+          ),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Image.asset(path),
+              ),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: text1,
+                      style: TextStyle(
+                        color: AppColors.mainColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: text2,
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 12,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _generateListSymptoms(String path, String text) {
     return Column(
       children: [
         Container(
@@ -90,12 +244,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  TextSpan _textSpan(String text, Color color) {
+  TextSpan _textSpan(String text, Color color, double fontSize) {
     return TextSpan(
       text: text,
       style: TextStyle(
         color: color,
-        fontSize: 18,
+        fontSize: fontSize,
         fontWeight: FontWeight.bold,
       ),
     );
@@ -103,7 +257,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _generateTopScreen(BuildContext context) {
     return Container(
-      height: 290,
+      height: 270,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: AppColors.mainColor,
@@ -125,7 +279,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _generateButtons() {
     return Positioned(
-      bottom: 30,
+      bottom: 20,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
