@@ -1,5 +1,5 @@
+import 'package:Covid19/components/top_screen.dart';
 import 'package:Covid19/core/consts.dart';
-import 'package:Covid19/core/flutter_icons.dart';
 import 'package:Covid19/screens/statistics_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,12 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _generateTopScreen(context),
+            TopScreen(
+              children: [
+                _generateMainText(),
+                _generateButtons(),
+              ],
+            ),
             SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(left: 20),
@@ -255,28 +260,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _generateTopScreen(BuildContext context) {
-    return Container(
-      height: 270,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: AppColors.mainColor,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
-        ),
-      ),
-      child: Stack(
-        children: [
-          _generateAppBar(),
-          _generateMainText(),
-          _generateButtons(),
-          Image.asset('assets/images/virus2.png'),
-        ],
-      ),
-    );
-  }
-
   Widget _generateButtons() {
     return Positioned(
       bottom: 20,
@@ -367,47 +350,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _generateAppBar() {
-    return Container(
-      height: 70,
-      width: double.infinity,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _generateMenuButton(),
-          _generateProfileIcon(),
-        ],
-      ),
-    );
-  }
-
-  Widget _generateMenuButton() {
-    return IconButton(
-      onPressed: () {},
-      icon: Icon(
-        FlutterIcons.menu,
-        color: Colors.white,
-      ),
-    );
-  }
-
-  Widget _generateProfileIcon() {
-    return Container(
-      height: 50,
-      width: 50,
-      margin: EdgeInsets.only(top: 15, right: 15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(100),
-        ),
-        border: Border.all(color: Colors.white),
-        image: DecorationImage(
-          image: AssetImage('assets/images/profile.jpg'),
         ),
       ),
     );
