@@ -262,7 +262,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _generateButtons() {
     return Positioned(
-      bottom: 20,
+      bottom: 15,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -311,7 +311,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _generateMainText() {
     return Positioned(
-      top: 75,
+      top: 65,
       child: Padding(
         padding: const EdgeInsets.only(
           left: 20,

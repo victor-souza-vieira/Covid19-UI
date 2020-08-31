@@ -3,7 +3,7 @@ import 'package:Covid19/core/flutter_icons.dart';
 import 'package:flutter/material.dart';
 
 class TopScreen extends StatelessWidget {
-  final List<Widget> children;
+  List<Widget> children = [];
 
   TopScreen({this.children}) {
     this.children.add(_generateAppBar());
@@ -18,7 +18,7 @@ class TopScreen extends StatelessWidget {
 
 Widget _generateTopScreen(BuildContext context, List<Widget> children) {
   return Container(
-    height: 270,
+    height: 250,
     width: MediaQuery.of(context).size.width,
     decoration: BoxDecoration(
       color: AppColors.mainColor,
@@ -67,9 +67,9 @@ Widget _generateProfileIcon() {
         Radius.circular(100),
       ),
       border: Border.all(color: Colors.white),
-      image: DecorationImage(
-        image: AssetImage('assets/images/profile.jpg'),
-      ),
+    ),
+    child: CircleAvatar(
+      backgroundImage: AssetImage('assets/images/profile.jpg'),
     ),
   );
 }
